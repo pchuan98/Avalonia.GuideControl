@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dotnet *)",
+      "Bash(dotnet:*)",
       "Bash(del:*)",
       "WebFetch(domain:docs.avaloniaui.net)",
       "Bash(find:*)",
