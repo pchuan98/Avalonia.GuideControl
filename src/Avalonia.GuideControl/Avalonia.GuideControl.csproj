@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);HAS_AVALONIA</DefineConstants>
+		<IsAotCompatible>true</IsAotCompatible>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DependencyPropertyGenerator">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<PackageReference Include="Avalonia" />
+		<PackageReference Include="Avalonia.Controls.DataGrid" />     
+    <PackageReference Include="CommunityToolkit.Mvvm" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Themes\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AvaloniaXaml Remove="Themes\Colors.axaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AvaloniaResource Update="Themes\Colors.axaml">
+	    <SubType>Designer</SubType>
+	  </AvaloniaResource>
+	</ItemGroup>
+
+</Project>

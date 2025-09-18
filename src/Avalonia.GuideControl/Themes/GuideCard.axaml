@@ -1,0 +1,62 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="using:Avalonia.GuideControl.Controls">
+
+    <Style Selector="controls|GuideCard">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="MinWidth" Value="220" />
+        <Setter Property="MaxWidth" Value="400" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid RowDefinitions="Auto * Auto" RowSpacing="5">
+                        <Grid Grid.Row="0" ColumnDefinitions="* Auto" ColumnSpacing="5">
+                            <TextBlock Name="PART_Header" Grid.Column="0" FontSize="18" FontWeight="SemiBold" IsVisible="{TemplateBinding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Text="{TemplateBinding Header}" TextWrapping="Wrap" />
+
+                            <TextBlock
+                                Name="PART_Tips"
+                                Grid.Column="1"
+                                MaxWidth="50"
+                                FontSize="14"
+                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                IsVisible="{TemplateBinding Tips,
+                                                            Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                Opacity="0.5"
+                                Text="{TemplateBinding Tips}"
+                                TextWrapping="Wrap" />
+                        </Grid>
+                        <ContentPresenter Name="PART_ContentPresenter" Grid.Row="1" Content="{TemplateBinding Content}" IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+                        <Grid Grid.Row="2" ColumnDefinitions="Auto * Auto">
+                            <Button Name="PART_PreviousButton" Grid.Column="0" HorizontalAlignment="Left" Content="{TemplateBinding PreviousButtonText}" IsVisible="{TemplateBinding IsPreviousButtonVisible}" />
+                            <Button Name="PART_SkipButton" Grid.Column="1" HorizontalAlignment="Center" Content="{TemplateBinding SkipButtonText}" IsVisible="{TemplateBinding IsSkipButtonVisible}" />
+                            <Button Name="PART_NextButton" Grid.Column="2" HorizontalAlignment="Right" Content="{TemplateBinding NextButtonText}" IsVisible="{TemplateBinding IsNextButtonVisible}" />
+
+                        </Grid>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!--  Classic 样式 - 基于默认模板，仅修改背景和前景色  -->
+    <Style Selector="controls|GuideCard.classic">
+        <Setter Property="Background" Value="#CC000000" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <!--  Classic 样式中的文本元素前景色设置  -->
+    <Style Selector="controls|GuideCard.classic /template/ TextBlock">
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <!--  Classic 样式中的按钮前景色设置  -->
+    <Style Selector="controls|GuideCard.classic /template/ Button">
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+</Styles>

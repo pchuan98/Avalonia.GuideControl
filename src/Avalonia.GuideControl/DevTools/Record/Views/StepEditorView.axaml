@@ -1,0 +1,182 @@
+<UserControl
+    x:Class="Avalonia.GuideControl.StepEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:Avalonia.GuideControl.Models"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:viewModels="clr-namespace:Avalonia.GuideControl.DevTools.Record"
+    d:DesignHeight="850"
+    d:DesignWidth="590"
+    x:DataType="viewModels:StepEditorViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.GuideControl/Themes/Colors.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Spacing="5">
+        <StackPanel.Styles>
+            <Style Selector="DockPanel>TextBlock">
+                <Setter Property="Width" Value="100" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </StackPanel.Styles>
+
+        <TextBlock FontSize="16" FontWeight="Bold" Text="步骤编辑器" />
+
+        <DockPanel>
+            <TextBlock Text="步骤ID" />
+            <TextBox Name="StepIdTextBox" IsReadOnly="True" Text="{Binding StepId}" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="别名" />
+            <TextBox Name="StepAliasTextBox" Text="{Binding StepAlias}" Watermark="步骤别名" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="可视化树" />
+            <TextBox Name="StepVisualTreeTextBox" Text="{Binding StepVisualTree}" Watermark="MainWindow.Panel.Button (Alt)" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="准备完成方法" />
+            <TextBox Name="StepPreparedMethodTextBox" Text="{Binding StepPreparedMethod}" Watermark="验证方法名称(可选)" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="完成方法" />
+            <TextBox Name="StepFinishMethodTextBox" Text="{Binding StepFinishMethod}" Watermark="验证方法名称(可选)" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="继承默认" />
+            <CheckBox Name="IsInheritCb" IsChecked="{Binding IsInheritDefaultConfig}" />
+
+            <Expander HorizontalAlignment="Stretch" Background="Transparent" Header="Card 通用设置" IsExpanded="{Binding !#IsInheritCb.IsChecked}">
+                <Expander.Styles>
+                    <Style Selector="Expander /template/ ToggleButton">
+                        <Setter Property="Background" Value="Transparent" />
+                    </Style>
+                    <Style Selector="Expander /template/ ToggleButton:pointerover">
+                        <Setter Property="Background" Value="Transparent" />
+                    </Style>
+                </Expander.Styles>
+                <StackPanel Orientation="Vertical" Spacing="5">
+
+                    <UniformGrid ColumnSpacing="10" Columns="3">
+                        <CheckBox Name="StepIsPreviousVisibleCheckBox" Content="显示上一步按钮" IsChecked="{Binding StepIsPreviousVisible}" />
+                        <CheckBox Name="StepIsSkipVisibleCheckBox" Content="显示跳过按钮" IsChecked="{Binding StepIsSkipVisible}" />
+                        <CheckBox Name="StepIsNextVisibleCheckBox" Content="显示下一步按钮" IsChecked="{Binding StepIsNextVisible}" />
+                    </UniformGrid>
+
+                    <DockPanel>
+                        <TextBlock Text="上一步按钮" />
+                        <TextBox Name="StepPreviousButtonTextBox" Text="{Binding StepPreviousButtonText}" />
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock Text="跳过按钮" />
+                        <TextBox Name="StepSkipButtonTextBox" Text="{Binding StepSkipButtonText}" />
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock Text="下一步按钮" />
+                        <TextBox Name="StepNextButtonTextBox" Text="{Binding StepNextButtonText}" />
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock HorizontalAlignment="Stretch" Text="样式类" />
+                        <ComboBox Name="StepStyleClassComboBox" HorizontalAlignment="Stretch" SelectedValue="{Binding StepStyleClass}">
+                            <ComboBoxItem Content="" />
+                            <ComboBoxItem Content="classic" />
+                        </ComboBox>
+                    </DockPanel>
+                </StackPanel>
+            </Expander>
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="卡片标题" />
+            <TextBox Name="StepHeaderTextBox" Text="{Binding StepHeader}" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="卡片内容" />
+            <TextBox Name="StepContentTextBox" Height="60" AcceptsReturn="True" Text="{Binding StepContent}" TextWrapping="Wrap" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="提示" />
+            <TextBox Name="StepTipsTextBox" Text="{Binding StepTips}" />
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="卡片位置" />
+            <ComboBox Name="StepPositionComboBox" HorizontalAlignment="Stretch" SelectedItem="{Binding StepPosition}">
+                <models:CardPosition>Top</models:CardPosition>
+                <models:CardPosition>Bottom</models:CardPosition>
+                <models:CardPosition>Left</models:CardPosition>
+                <models:CardPosition>Right</models:CardPosition>
+                <models:CardPosition>Center</models:CardPosition>
+            </ComboBox>
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="卡片偏移" />
+            <UniformGrid ColumnSpacing="10" Rows="1">
+                <NumericUpDown Name="StepOffsetXNumeric" AllowSpin="True" Watermark="相对 x 偏移" Value="{Binding StepOffsetX}" />
+                <NumericUpDown Name="StepOffsetYNumeric" Value="{Binding StepOffsetY}" />
+            </UniformGrid>
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="Hole偏移" />
+            <UniformGrid ColumnSpacing="10" Rows="1">
+                <NumericUpDown Name="HoleOffsetXNumeric" AllowSpin="True" Watermark="x 偏移" Value="{Binding HoleOffsetX}" />
+                <NumericUpDown Name="HoleOffsetYNumeric" AllowSpin="True" Watermark="y 偏移" Value="{Binding HoleOffsetY}" />
+            </UniformGrid>
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock VerticalAlignment="Top" Text="Hole内边距" />
+            <UniformGrid ColumnSpacing="10" Columns="2" RowSpacing="5" Rows="2">
+                <NumericUpDown Name="HolePaddingLeftNumeric" AllowSpin="True" Watermark="左边距" Value="{Binding HolePaddingLeft}" />
+                <NumericUpDown Name="HolePaddingTopNumeric" AllowSpin="True" Watermark="上边距" Value="{Binding HolePaddingTop}" />
+                <NumericUpDown Name="HolePaddingRightNumeric" AllowSpin="True" Watermark="右边距" Value="{Binding HolePaddingRight}" />
+                <NumericUpDown Name="HolePaddingBottomNumeric" AllowSpin="True" Watermark="下边距" Value="{Binding HolePaddingBottom}" />
+            </UniformGrid>
+        </DockPanel>
+
+        <DockPanel>
+            <TextBlock Text="额外Holes" />
+            <ListBox Height="80" Background="Transparent" ItemsSource="{Binding StepAdditionalHoles}">
+
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="5 2" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="MinHeight" Value="0" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListBox.Styles>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="2" Padding="5" Background="LightGray" CornerRadius="3">
+                            <TextBlock Text="{Binding}" />
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+
+    </StackPanel>
+</UserControl>

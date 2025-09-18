@@ -1,0 +1,44 @@
+<UserControl
+    x:Class="Avalonia.GuideControl.BasicInfoView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:guideControl="clr-namespace:Avalonia.GuideControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:record="clr-namespace:Avalonia.GuideControl.DevTools.Record"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="record:BasicInfoViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.GuideControl/Themes/Colors.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Spacing="10">
+        <TextBlock FontSize="16" FontWeight="Bold" Text="基本信息" />
+
+        <Grid ColumnDefinitions="100 *" RowDefinitions="Auto Auto Auto Auto" RowSpacing="8">
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="ID" />
+            <TextBox Name="IdTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding Id}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="别名" />
+            <TextBox Name="AliasTextBox" Grid.Row="1" Grid.Column="1" Text="{Binding Alias}" Watermark="输入引导流程别名" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="描述" />
+            <TextBox
+                Name="DescriptionTextBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="60"
+                AcceptsReturn="True"
+                Text="{Binding Description}"
+                TextWrapping="Wrap"
+                Watermark="输入引导流程描述" />
+        </Grid>
+    </StackPanel>
+</UserControl>

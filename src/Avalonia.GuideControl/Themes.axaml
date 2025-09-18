@@ -1,0 +1,5 @@
+<Styles x:Class="Avalonia.GuideControl.GuideTheme" xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:ClassModifier="public">
+
+    <StyleInclude Source="avares://Avalonia.GuideControl/Themes/GuideCard.axaml" />
+
+</Styles>

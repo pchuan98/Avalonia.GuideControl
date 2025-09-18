@@ -1,0 +1,22 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+  <!-- Only Used Colors in DevTools -->
+  
+  <!-- Colors -->
+  <Color x:Key="SystemBlue">#007AFF</Color>
+  <Color x:Key="SystemTeal">#30B0C7</Color>
+  <Color x:Key="SystemGray5">#E5E5EA</Color>
+  <Color x:Key="SystemGray6">#F2F2F7</Color>
+  <Color x:Key="SystemBackground">#FFFFFF</Color>
+  <Color x:Key="Separator">#3C3C4329</Color>
+  
+  <!-- Brushes -->
+  <SolidColorBrush x:Key="SystemBlueBrush" Color="{StaticResource SystemBlue}" />
+  <SolidColorBrush x:Key="SystemTealBrush" Color="{StaticResource SystemTeal}" />
+  <SolidColorBrush x:Key="SystemGray5Brush" Color="{StaticResource SystemGray5}" />
+  <SolidColorBrush x:Key="SystemGray6Brush" Color="{StaticResource SystemGray6}" />
+  <SolidColorBrush x:Key="SystemBackgroundBrush" Color="{StaticResource SystemBackground}" />
+  <SolidColorBrush x:Key="SeparatorBrush" Color="{StaticResource Separator}" />
+  
+</ResourceDictionary>

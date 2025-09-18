@@ -1,0 +1,105 @@
+<UserControl
+    x:Class="Avalonia.GuideControl.StepManagerView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Avalonia.GuideControl.DevTools.Record"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="local:StepsOrderViewModel"
+    FontSize="12"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.GuideControl/Themes/Colors.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Design.DataContext>
+        <local:StepsOrderViewModel>
+            <local:StepsOrderViewModel.Steps>
+                <local:StepEditorViewModel StepAlias="欢迎页面" StepFinishMethod="点击下一步按钮" StepVisualTree="MainWindow > Grid > WelcomePanel" />
+                <local:StepEditorViewModel StepAlias="功能介绍" StepFinishMethod="自动延时3秒" StepVisualTree="MainWindow > Grid > FeaturePanel > StackPanel" />
+                <local:StepEditorViewModel StepAlias="设置向导" StepFinishMethod="点击确认按钮" StepVisualTree="SettingsWindow > TabControl > GeneralTab" />
+                <local:StepEditorViewModel StepAlias="完成引导" StepFinishMethod="用户手动点击" StepVisualTree="MainWindow > Grid > CompletionPanel > Button" />
+            </local:StepsOrderViewModel.Steps>
+        </local:StepsOrderViewModel>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,*" RowSpacing="10">
+
+        <!--  工具栏  -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="5">
+            <StackPanel.Styles>
+                <Style Selector="Button">
+                    <Setter Property="Width" Value="100" />
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="{StaticResource SystemBlueBrush}" />
+                </Style>
+            </StackPanel.Styles>
+            <Button Command="{Binding AddStepCommand}" Content="添加" />
+            <Button Command="{Binding RemoveStepCommand}" Content="删除" />
+            <Button Command="{Binding MoveUpCommand}" Content="上移" />
+            <Button Command="{Binding MoveDownCommand}" Content="下移" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="{StaticResource SystemGray6Brush}" BorderThickness="1" CornerRadius="8" />
+
+        <Grid Grid.Row="1" Margin="10" RowDefinitions="Auto,*">
+
+            <!--  列标题  -->
+            <Border Grid.Row="0" Background="{StaticResource SystemGray5Brush}" Padding="10,5" CornerRadius="4">
+                <Grid ColumnDefinitions="70,100,*,150" ColumnSpacing="10">
+                    <TextBlock Grid.Column="0" FontWeight="Bold" Text="ID" />
+                    <TextBlock Grid.Column="1" FontWeight="Bold" Text="Alias" />
+                    <TextBlock Grid.Column="2" FontWeight="Bold" Text="VisualTree" />
+                    <TextBlock Grid.Column="3" FontWeight="Bold" Text="FinishMethod" />
+                </Grid>
+            </Border>
+
+            <!--  步骤列表  -->
+            <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Steps}" SelectedItem="{Binding SelectedStep}" SelectionMode="Single">
+
+                <ListBox.Styles>
+                    <Style Selector="ListBoxItem">
+                        <Setter Property="Padding" Value="5 2" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="MinHeight" Value="0" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListBox.Styles>
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate x:DataType="local:StepEditorViewModel">
+                        <Panel VerticalAlignment="Stretch">
+                            <Grid ColumnDefinitions="70,100,*,150" ColumnSpacing="10">
+                                <Grid.Styles>
+                                    <Style Selector="TextBlock">
+                                        <Setter Property="Padding" Value="0 5" />
+                                    </Style>
+                                </Grid.Styles>
+                                <!--  ID 列（显示前8位）  -->
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding StepId, Converter={x:Static local:StringTruncateConverter.Instance}}" />
+
+                                <!--  Alias 列  -->
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding StepAlias}" />
+
+                                <!--  VisualTree 列  -->
+                                <TextBlock Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding StepVisualTree}" TextTrimming="CharacterEllipsis" />
+
+                                <!--  FinishMethod 列  -->
+                                <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="{Binding StepFinishMethod}" TextTrimming="CharacterEllipsis" />
+
+                                <Separator Grid.Column="0" Grid.ColumnSpan="4" Height="1" Margin="0" VerticalAlignment="Bottom" Background="{StaticResource SeparatorBrush}" />
+                            </Grid>
+                        </Panel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Grid>
+</UserControl>

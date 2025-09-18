@@ -1,0 +1,50 @@
+<UserControl
+    x:Class="Avalonia.GuideControl.DefaultCardView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:record="clr-namespace:Avalonia.GuideControl.DevTools.Record"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="record:DefaultCardViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.GuideControl/Themes/Colors.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Spacing="10">
+        <TextBlock FontSize="16" FontWeight="Bold" Text="默认卡片配置" />
+
+        <Grid ColumnDefinitions="140 *" RowDefinitions="Auto Auto Auto Auto Auto Auto Auto" RowSpacing="8">
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="显示上一步" />
+            <CheckBox Name="DefaultIsPreviousVisibleCheckBox" Grid.Row="0" Grid.Column="1" IsChecked="{Binding DefaultIsPreviousVisible}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="显示跳过" />
+            <CheckBox Name="DefaultIsSkipVisibleCheckBox" Grid.Row="1" Grid.Column="1" IsChecked="{Binding DefaultIsSkipVisible}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="显示下一步" />
+            <CheckBox Name="DefaultIsNextVisibleCheckBox" Grid.Row="2" Grid.Column="1" IsChecked="{Binding DefaultIsNextVisible}" />
+
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="上一步按钮" />
+            <TextBox Name="DefaultPreviousButtonTextBox" Grid.Row="3" Grid.Column="1" Text="{Binding DefaultPreviousButtonText}" />
+
+            <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="跳过按钮" />
+            <TextBox Name="DefaultSkipButtonTextBox" Grid.Row="4" Grid.Column="1" Text="{Binding DefaultSkipButtonText}" />
+
+            <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="下一步按钮" />
+            <TextBox Name="DefaultNextButtonTextBox" Grid.Row="5" Grid.Column="1" Text="{Binding DefaultNextButtonText}" />
+
+            <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="样式类" />
+            <ComboBox Name="DefaultStyleClassComboBox" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" SelectedValue="{Binding DefaultStyleClass}">
+                <ComboBoxItem Content="" />
+                <ComboBoxItem Content="classic" />
+            </ComboBox>
+        </Grid>
+    </StackPanel>
+</UserControl>

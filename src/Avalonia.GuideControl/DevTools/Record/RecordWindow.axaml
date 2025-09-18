@@ -1,0 +1,105 @@
+<Window
+    x:Class="Avalonia.GuideControl.RecordWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:guideControl="clr-namespace:Avalonia.GuideControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:Avalonia.GuideControl.DevTools.Record"
+    Title="RecordWindow"
+    d:DesignHeight="800"
+    d:DesignWidth="1200"
+    x:DataType="viewModels:RecordViewModel"
+    Background="Transparent"
+    CanResize="False"
+    CornerRadius="10"
+    SystemDecorations="None"
+    Topmost="False"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.GuideControl/Themes/Colors.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Panel>
+        <Border Margin="2" Background="{StaticResource SystemBackgroundBrush}" BorderBrush="{StaticResource SystemTealBrush}" BorderThickness="1" CornerRadius="8" />
+
+        <Grid Margin="5" RowDefinitions="Auto *">
+
+            <!--  Menu Bar  -->
+            <Panel Grid.Row="0" Margin="10,0,0,0">
+                <Panel Name="ContorlPanel" HorizontalAlignment="Stretch" Background="Transparent" />
+                <Menu HorizontalAlignment="Left">
+                    <MenuItem Header="文件">
+                        <MenuItem Command="{Binding NewConfigCommand}" Header="新建" />
+                        <MenuItem Click="OnClickOpenFile" Header="打开" />
+                        <MenuItem Click="OnClickSaveFile" Header="保存" />
+                    </MenuItem>
+                </Menu>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="10">
+                    <Menu>
+                        <MenuItem HorizontalAlignment="Right" Background="Transparent" Click="OnClickTestSelectedGuideStep" Header="预览" />
+                    </Menu>
+                    <CheckBox Margin="0,0,10,0" HorizontalAlignment="Right" IsChecked="True" IsCheckedChanged="OnTopmostChanged" />
+                </StackPanel>
+            </Panel>
+
+            <UniformGrid Grid.Row="1" ColumnSpacing="0" Columns="2">
+                <UniformGrid.Styles>
+                    <Style Selector="Grid>Border">
+                        <Setter Property="CornerRadius" Value="8" />
+                        <Setter Property="Padding" Value="15" />
+                    </Style>
+                    <Style Selector="TabItem>Border">
+                        <Setter Property="CornerRadius" Value="8" />
+                        <Setter Property="Padding" Value="15" />
+                    </Style>
+                </UniformGrid.Styles>
+                <TabControl>
+                    <TabItem Header="基础设置">
+                        <Grid Margin="0,10,0,0" RowDefinitions="Auto Auto *" RowSpacing="10">
+                            <Border Grid.Row="0" Background="{StaticResource SystemGray6Brush}">
+                                <guideControl:BasicInfoView DataContext="{Binding BasicInfo}" />
+                            </Border>
+                            <Border Grid.Row="1" Background="{StaticResource SystemGray6Brush}">
+                                <guideControl:DefaultCardView DataContext="{Binding DefaultCard}" />
+                            </Border>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Step编辑">
+                        <Border Margin="0,10" Background="{StaticResource SystemGray6Brush}">
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                <guideControl:StepEditorView DataContext="{Binding StepEditor}" />
+                            </ScrollViewer>
+                        </Border>
+                    </TabItem>
+                </TabControl>
+
+                <TabControl>
+                    <TabItem Header="Json预览">
+                        <TextBox
+                            Name="JsonTextBox"
+                            Margin="0,10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            AcceptsReturn="True"
+                            CornerRadius="8"
+                            FontFamily="Consolas,Monaco,monospace"
+                            FontSize="12"
+                            IsReadOnly="True"
+                            Text="{Binding JsonString}"
+                            TextWrapping="Wrap" />
+                    </TabItem>
+                    <TabItem Header="Step管理">
+                        <guideControl:StepManagerView Margin="0,10" DataContext="{Binding StepsOrder}" />
+                    </TabItem>
+                </TabControl>
+            </UniformGrid>
+        </Grid>
+    </Panel>
+
+</Window>

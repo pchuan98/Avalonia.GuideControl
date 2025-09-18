@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!-- Set versions of dependencies that need special treatment or consist of multiple packages of the same version. -->
+  <PropertyGroup>
+    <SilkVersion>2.22.0</SilkVersion>
+    <NumVectorsVersion>4.6.1</NumVectorsVersion>
+    <AvaloniaVersion>11.3.5</AvaloniaVersion>
+    <CommunityToolkitVersion>8.2.1</CommunityToolkitVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Avalonia" Version="11.3.6" />
+    <PackageVersion Include="Avalonia.Headless" Version="11.3.6" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="Avalonia.Controls.DataGrid" Version="11.3.6" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageVersion Include="DependencyPropertyGenerator" Version="1.5.0" />
+    <PackageVersion Include="Irihi.Ursa" Version="1.12.0" />
+    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.12.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.9" />
+    <PackageVersion Include="HotAvalonia" Version="3.0.0" />
+  </ItemGroup>
+</Project>

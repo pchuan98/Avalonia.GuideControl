@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/_/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="nuget.config" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/_claude/">
+    <File Path="codes.md" />
+    <File Path="todo.md" />
+  </Folder>
+  <Project Path="src/Avalonia.GuideControl.Tests/Avalonia.GuideControl.Tests.csproj" Id="32d04cbc-79f8-4284-99dc-a38d5d723829" />
+  <Project Path="src/Avalonia.GuideControl/Avalonia.GuideControl.csproj" Id="a15d8919-ad8e-495a-aacd-005d25c738ef" />
+</Solution>

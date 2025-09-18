@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet *)",
+      "Bash(del:*)",
+      "WebFetch(domain:docs.avaloniaui.net)",
+      "Bash(find:*)",
+      "Bash(taskkill:*)",
+      "Bash(cat:*)",
+      "Bash(dir:*)",
+      "Bash(more:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
