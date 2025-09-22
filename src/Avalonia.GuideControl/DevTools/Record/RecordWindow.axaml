@@ -28,7 +28,7 @@
     <Panel>
         <Border Margin="2" Background="{StaticResource SystemBackgroundBrush}" BorderBrush="{StaticResource SystemTealBrush}" BorderThickness="1" CornerRadius="8" />
 
-        <Grid Margin="5" RowDefinitions="Auto *">
+        <Grid Margin="5" RowDefinitions="Auto * 32">
 
             <!--  Menu Bar  -->
             <Panel Grid.Row="0" Margin="10,0,0,0">
@@ -42,9 +42,10 @@
                 </Menu>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="10">
                     <Menu>
+                        <MenuItem HorizontalAlignment="Right" Background="Transparent" Command="{Binding SaveConfigDirectlyCommand}" Header="保存" />
                         <MenuItem HorizontalAlignment="Right" Background="Transparent" Click="OnClickTestSelectedGuideStep" Header="预览" />
                     </Menu>
-                    <CheckBox Margin="0,0,10,0" HorizontalAlignment="Right" IsChecked="True" IsCheckedChanged="OnTopmostChanged" />
+                    <CheckBox Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" IsChecked="True" IsCheckedChanged="OnTopmostChanged" />
                 </StackPanel>
             </Panel>
 
@@ -99,6 +100,8 @@
                     </TabItem>
                 </TabControl>
             </UniformGrid>
+
+            <TextBlock Name="TipsTb" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" />
         </Grid>
     </Panel>
 

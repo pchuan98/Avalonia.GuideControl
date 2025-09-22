@@ -14,12 +14,12 @@ namespace Avalonia.GuideControl.Controls;
 /// 按钮的显示状态和文本内容都可以通过属性进行自定义配置。
 /// </remarks>
 /// <example>
-/// var card = new GuideCard { Header = "步骤1", Content = "点击按钮继续" };
+/// var card = new GuideCard { Header = "步骤1", Text = "点击按钮继续" };
 /// card.NextClick += (s, e) => ShowNextStep();
 /// </example>
 [DependencyProperty<string>("Header")]
 [DependencyProperty<string>("Tips")]
-[DependencyProperty<object>("Content")]
+[DependencyProperty<string>("Text")]
 [DependencyProperty<string>("PreviousButtonText", DefaultValue = "上一步")]
 [DependencyProperty<string>("NextButtonText", DefaultValue = "下一步")]
 [DependencyProperty<string>("SkipButtonText", DefaultValue = "跳过")]
@@ -63,14 +63,7 @@ public partial class GuideCard : TemplatedControl
     /// <example>card.SkipClick += (s, e) => SkipGuide();</example>
     public event EventHandler<RoutedEventArgs>? SkipClick;
 
-    /// <summary>
-    /// 应用控件模板时获取按钮实例并绑定事件处理器
-    /// </summary>
-    /// <param name="e">模板应用事件参数，包含命名作用域用于查找模板部件</param>
-    /// <remarks>
-    /// 此方法会先解除旧按钮的事件绑定，然后重新获取按钮实例并绑定新的事件处理器。
-    /// 如果模板中缺少某个按钮部件，对应的字段将为 null，不会影响其他按钮的正常工作。
-    /// </remarks>
+    /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);

@@ -96,12 +96,22 @@ internal partial class RecordViewModel : ObservableObject
 
     #region MenuItem Commands
 
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(SaveConfigDirectlyCommand))]
+    [NotifyPropertyChangedFor(nameof(CanSaveDirectly))]
+    public partial string? SavePath { get; set; } = null;
+    public bool CanSaveDirectly => SavePath is not null;
+
     /// <summary>
     /// 创建新的配置，重置所有数据到初始状态
     /// </summary>
     /// <remarks>清空基本信息、默认卡片配置、步骤编辑器和步骤列表</remarks>
     [RelayCommand]
-    private void NewConfig() => UpdateGuide(new Guide());
+    private void NewConfig()
+    {
+        SavePath = null;
+        UpdateGuide(new Guide());
+    }
 
     public void UpdateGuide(Guide guide)
     {
@@ -128,6 +138,8 @@ internal partial class RecordViewModel : ObservableObject
 
         if (guide is not null)
             UpdateGuide(guide);
+
+        SavePath = path;
     }
 
     /// <summary>
@@ -141,6 +153,15 @@ internal partial class RecordViewModel : ObservableObject
         RefreshGuide();
 
         await File.WriteAllTextAsync(path, JsonString, Encoding.UTF8);
+
+        SavePath = path;
+    }
+
+    [RelayCommand(CanExecute = nameof(CanSaveDirectly))]
+    private async Task SaveConfigDirectly()
+    {
+        if (SavePath is not null)
+            await SaveConfig(SavePath);
     }
 
     #endregion

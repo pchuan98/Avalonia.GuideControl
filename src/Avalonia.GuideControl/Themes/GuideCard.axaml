@@ -1,33 +1,59 @@
 <Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="using:Avalonia.GuideControl.Controls">
 
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.GuideControl/Themes/CardResource.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
     <Style Selector="controls|GuideCard">
-        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="8" />
-        <Setter Property="Padding" Value="16" />
-        <Setter Property="MinWidth" Value="220" />
-        <Setter Property="MaxWidth" Value="400" />
+        <Setter Property="Background" Value="{DynamicResource GuideCardBackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GuideCardBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource GuideCardBorderThickness}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource GuideCardCornerRadius}" />
+        <Setter Property="Padding" Value="{DynamicResource GuideCardPadding}" />
+        <Setter Property="MinWidth" Value="{DynamicResource GuideCardMinWidth}" />
+        <Setter Property="MaxWidth" Value="{DynamicResource GuideCardMaxWidth}" />
         <Setter Property="Template">
             <ControlTemplate>
                 <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
                     <Grid RowDefinitions="Auto * Auto" RowSpacing="5">
                         <Grid Grid.Row="0" ColumnDefinitions="* Auto" ColumnSpacing="5">
-                            <TextBlock Name="PART_Header" Grid.Column="0" FontSize="18" FontWeight="SemiBold" IsVisible="{TemplateBinding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" Text="{TemplateBinding Header}" TextWrapping="Wrap" />
+                            <TextBlock
+                                Name="PART_Header"
+                                Grid.Column="0"
+                                FontSize="{DynamicResource GuideCardTitleFontSize}"
+                                FontWeight="{DynamicResource GuideCardTitleFontWeight}"
+                                Foreground="{DynamicResource GuideCardTitleForegroundBrush}"
+                                IsVisible="{TemplateBinding Header,
+                                                            Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                Text="{TemplateBinding Header}"
+                                TextWrapping="Wrap" />
 
                             <TextBlock
                                 Name="PART_Tips"
                                 Grid.Column="1"
-                                MaxWidth="50"
-                                FontSize="14"
-                                Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                                MaxWidth="{DynamicResource GuideCardTipsMaxWidth}"
+                                FontSize="{DynamicResource GuideCardTipsFontSize}"
+                                Foreground="{DynamicResource GuideCardTipsForegroundBrush}"
                                 IsVisible="{TemplateBinding Tips,
                                                             Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                Opacity="0.5"
+                                Opacity="{DynamicResource GuideCardTipsOpacity}"
                                 Text="{TemplateBinding Tips}"
                                 TextWrapping="Wrap" />
                         </Grid>
-                        <ContentPresenter Name="PART_ContentPresenter" Grid.Row="1" Content="{TemplateBinding Content}" IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                        <TextBlock
+                            Name="PART_Content"
+                            Grid.Row="1"
+                            FontSize="{DynamicResource GuideCardContentFontSize}"
+                            FontWeight="{DynamicResource GuideCardContentFontWeight}"
+                            Foreground="{DynamicResource GuideCardForegroundBrush}"
+                            IsVisible="{TemplateBinding Text,
+                                                        Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                            Text="{TemplateBinding Text}"
+                            TextWrapping="Wrap" />
 
                         <Grid Grid.Row="2" ColumnDefinitions="Auto * Auto">
                             <Button Name="PART_PreviousButton" Grid.Column="0" HorizontalAlignment="Left" Content="{TemplateBinding PreviousButtonText}" IsVisible="{TemplateBinding IsPreviousButtonVisible}" />

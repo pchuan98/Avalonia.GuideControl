@@ -22,7 +22,7 @@ public static class MaskExtensions
     public static Mask ControlMask { get; } = new()
     {
         Background = Brushes.Red,
-        Opacity = 0.5,
+        Opacity = 0.2,
         IsHitTestVisible = false
     };
 

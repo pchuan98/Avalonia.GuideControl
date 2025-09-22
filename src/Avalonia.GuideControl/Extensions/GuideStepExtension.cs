@@ -1,8 +1,5 @@
 ﻿using Avalonia.Controls;
-using Avalonia.GuideControl.Controls;
 using Avalonia.GuideControl.Models;
-using Avalonia.LogicalTree;
-using Avalonia.Threading;
 
 namespace Avalonia.GuideControl.Extensions;
 

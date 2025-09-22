@@ -133,7 +133,7 @@ public static class CardExtension
         var card = new GuideCard
         {
             Header = config.Header,
-            Content = config.Content,
+            Text = config.Content,
             Tips = config.Tips,
             PreviousButtonText = config.PreviousButtonText ?? defaultConfig?.PreviousButtonText ?? "Previous",
             NextButtonText = config.NextButtonText ?? defaultConfig?.NextButtonText ?? "Next",

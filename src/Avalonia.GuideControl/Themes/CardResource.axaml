@@ -1,0 +1,67 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- GuideCard Colors -->
+    <Color x:Key="GuideCardBackground">#F9F9F9</Color>
+    <Color x:Key="GuideCardBorder">#E0E0E0</Color>
+    <Color x:Key="GuideCardForeground">#2C2C2C</Color>
+    <Color x:Key="GuideCardTipsForeground">#888888</Color>
+    
+    <!-- Title Colors -->
+    <Color x:Key="GuideCardTitleForeground">#1C1C1C</Color>
+    <Color x:Key="GuideCardTitleBackground">Transparent</Color>
+    
+    <!-- Button Colors -->
+    <Color x:Key="GuideCardButtonForeground">#FFFFFF</Color>
+    <Color x:Key="GuideCardButtonBackground">#007ACC</Color>
+    <Color x:Key="GuideCardButtonHoverBackground">#005A9B</Color>
+    <Color x:Key="GuideCardButtonBorder">#005A9B</Color>
+
+    <!-- GuideCard Brushes -->
+    <SolidColorBrush x:Key="GuideCardBackgroundBrush" Color="{StaticResource GuideCardBackground}" />
+    <SolidColorBrush x:Key="GuideCardBorderBrush" Color="{StaticResource GuideCardBorder}" />
+    <SolidColorBrush x:Key="GuideCardForegroundBrush" Color="{StaticResource GuideCardForeground}" />
+    <SolidColorBrush x:Key="GuideCardTipsForegroundBrush" Color="{StaticResource GuideCardTipsForeground}" />
+    
+    <!-- Title Brushes -->
+    <SolidColorBrush x:Key="GuideCardTitleForegroundBrush" Color="{StaticResource GuideCardTitleForeground}" />
+    <SolidColorBrush x:Key="GuideCardTitleBackgroundBrush" Color="{StaticResource GuideCardTitleBackground}" />
+    
+    <!-- Button Brushes -->
+    <SolidColorBrush x:Key="GuideCardButtonForegroundBrush" Color="{StaticResource GuideCardButtonForeground}" />
+    <SolidColorBrush x:Key="GuideCardButtonBackgroundBrush" Color="{StaticResource GuideCardButtonBackground}" />
+    <SolidColorBrush x:Key="GuideCardButtonHoverBackgroundBrush" Color="{StaticResource GuideCardButtonHoverBackground}" />
+    <SolidColorBrush x:Key="GuideCardButtonBorderBrush" Color="{StaticResource GuideCardButtonBorder}" />
+
+    <!-- Font Sizes -->
+    <x:Double x:Key="GuideCardTitleFontSize">18</x:Double>
+    <x:Double x:Key="GuideCardTipsFontSize">14</x:Double>
+    <x:Double x:Key="GuideCardContentFontSize">14</x:Double>
+    <x:Double x:Key="GuideCardButtonFontSize">14</x:Double>
+
+    <!-- Font Weights -->
+    <FontWeight x:Key="GuideCardTitleFontWeight">SemiBold</FontWeight>
+    <FontWeight x:Key="GuideCardTipsFontWeight">Normal</FontWeight>
+    <FontWeight x:Key="GuideCardContentFontWeight">Normal</FontWeight>
+    <FontWeight x:Key="GuideCardButtonFontWeight">Normal</FontWeight>
+
+    <!-- Border Properties -->
+    <Thickness x:Key="GuideCardBorderThickness">1</Thickness>
+    <CornerRadius x:Key="GuideCardCornerRadius">8</CornerRadius>
+    <Thickness x:Key="GuideCardButtonBorderThickness">1</Thickness>
+    <CornerRadius x:Key="GuideCardButtonCornerRadius">4</CornerRadius>
+
+    <!-- Padding and Margins -->
+    <Thickness x:Key="GuideCardPadding">16</Thickness>
+    <Thickness x:Key="GuideCardButtonPadding">8,4</Thickness>
+    <Thickness x:Key="GuideCardButtonMargin">4,0</Thickness>
+
+    <!-- Sizes -->
+    <x:Double x:Key="GuideCardMinWidth">220</x:Double>
+    <x:Double x:Key="GuideCardMaxWidth">400</x:Double>
+    <x:Double x:Key="GuideCardTipsMaxWidth">50</x:Double>
+
+    <!-- Opacity -->
+    <x:Double x:Key="GuideCardTipsOpacity">0.5</x:Double>
+
+</ResourceDictionary>

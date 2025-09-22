@@ -1,7 +1,6 @@
-using System.ComponentModel;
 using System.Diagnostics;
 using Avalonia.Controls;
-using Avalonia.Dialogs;
+using Avalonia.Controls.Primitives;
 using Avalonia.GuideControl.Controls;
 using Avalonia.GuideControl.DevTools.Record;
 using Avalonia.GuideControl.Extensions;
@@ -17,6 +16,7 @@ public partial class RecordWindow : Window
     private bool _isDragging = false;
     private Point _lastPointerPosition;
     private bool _isTestProcess = false;
+    private bool _isShowMask = false;
     private GuideManager? _manager;
 
     public Window? Host
@@ -87,19 +87,23 @@ public partial class RecordWindow : Window
         if (Host is null) return;
         if (DataContext is not RecordViewModel vm) return;
 
+        // todo：窗口关闭的时候要有一个Unregistered
         Host.PointerMoved += (sender, args) =>
         {
-            if (sender is not Window host || _isTestProcess) return;
+            if (sender is not Window host || _isTestProcess || _isShowMask) return;
             var pos = args.GetCurrentPoint(host).Position;
 
             var control = host.FindControls(pos)
                 .Where(c => c is not Mask)
-                .Where(c => c is Button or UserControl or MenuItem or TabItem or ComboBox or ComboBoxItem)
+                //.Where(c=>c.GetType().ToString().ToLower().Contains("dialog"))
+                .Where(c => c is Button or MenuItem or UniformGrid)
                 .Topmost(host);
 
             if (control is not null)
             {
                 selectControl = control;
+
+                TipsTb.Text = $"{control.GetType()} | {control.VisualTreeString(this)}";
                 control.ShowControlMask();
             }
             else MaskExtensions.HiddenControlMask();
@@ -107,9 +111,13 @@ public partial class RecordWindow : Window
 
         Host.KeyDown += (_, args) =>
         {
-            if ((args.KeyModifiers & KeyModifiers.Alt) != 0)
-                vm.SelectControl = selectControl?.Info(Host);
-            else if (args.Key == Key.F4)
+            if (args.Key == Key.F2)
+            {
+                if((args.KeyModifiers & KeyModifiers.Control) != 0)
+                    _isShowMask = !_isShowMask;
+                else vm.SelectControl = selectControl?.Info(Host);
+            }
+            else if (args.Key == Key.F3)
             {
                 if (selectControl?.Info(Host)?.VisualTree is { } tree
                     && vm?.StepsOrder?.SelectedStep is not null)
@@ -188,7 +196,7 @@ public partial class RecordWindow : Window
 
             var file = files[0];
 
-            await vm.OpenConfig(file.Path.AbsolutePath)!;
+            await vm.OpenConfig(file.Path.LocalPath)!;
         }
         catch (Exception ex)
         {
@@ -226,7 +234,7 @@ public partial class RecordWindow : Window
             });
 
             if (file == null) return;
-            await vm.SaveConfig(file.Path.AbsolutePath);
+            await vm.SaveConfig(file.Path.LocalPath);
         }
         catch (Exception ex)
         {
